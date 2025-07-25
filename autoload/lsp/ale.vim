@@ -111,13 +111,13 @@ function! s:notify_diag_to_ale(bufnr, diags) abort
             let idx = 0
             for loc in locs
                 let severity = get(diag.params.diagnostics[idx], 'severity', s:ERROR)
+                let idx += 1
                 if severity > threshold
                     continue
                 endif
                 let loc.text = '[' . server . '] ' . loc.text
                 let loc.type = s:get_loc_type(severity)
                 let results += [loc]
-                let idx += 1
             endfor
         endfor
     catch
